@@ -37,7 +37,7 @@ body{
 }
 #typing{
   font-family:'Great Vibes',cursive;
-  font-size:3.4rem;
+  font-size:3.2rem;
   margin-top:20px;
 }
 
@@ -67,6 +67,7 @@ button,input{
 button{
   background:#ff2f68;
   color:#fff;
+  cursor:pointer;
 }
 button:hover{transform:scale(1.05)}
 
@@ -101,22 +102,22 @@ button:hover{transform:scale(1.05)}
 </div>
 
 <!-- AUDIO -->
-<audio id="music" preload="auto">
+<audio id="music">
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <!-- START -->
 <div class="card hidden" id="startCard">
   <div class="teddy">🧸</div>
-  <h2>Tap to Start 💖</h2>
-  <button onclick="startSite()">Start</button>
+  <h2>Tap to Continue 💖</h2>
+  <button onclick="startSite()">Continue</button>
 </div>
 
 <!-- NAME -->
 <div class="card hidden" id="nameCard">
-  <h2>Your Name 💝</h2>
+  <h2>Enter Her Name 💝</h2>
   <input id="nameInput" placeholder="Sargam">
-  <button onclick="showQuiz()">Next 🌹</button>
+  <button onclick="goQuiz()">Next 🌹</button>
 </div>
 
 <!-- QUIZ -->
@@ -134,57 +135,68 @@ button:hover{transform:scale(1.05)}
 </div>
 
 <script>
-/* TYPING */
-const text="Happy Rose Day Sargam 💝";
-let t=0;
-function type(){
-  if(t<text.length){
-    typing.innerHTML+=text[t++];
-    setTimeout(type,120);
+/* ELEMENTS */
+const intro = document.getElementById("intro");
+const typing = document.getElementById("typing");
+const startCard = document.getElementById("startCard");
+const nameCard = document.getElementById("nameCard");
+const quizCard = document.getElementById("quizCard");
+const finalCard = document.getElementById("finalCard");
+const questionEl = document.getElementById("question");
+const music = document.getElementById("music");
+
+/* TYPING INTRO */
+const text = "Happy Rose Day Sargam 💝";
+let i = 0;
+
+function typeText(){
+  if(i < text.length){
+    typing.innerHTML += text[i++];
+    setTimeout(typeText,120);
   }else{
     setTimeout(()=>{
       intro.classList.add("hidden");
       startCard.classList.remove("hidden");
-    },800);
+    },1000);
   }
 }
-type();
+typeText();
 
-/* START + MUSIC */
+/* START */
 function startSite(){
-  music.play(); // ✅ USER CLICK → MUSIC WORKS
+  music.play(); // ✅ user click → music works
   startCard.classList.add("hidden");
   nameCard.classList.remove("hidden");
 }
 
 /* QUIZ */
-let q=0;
-const questions=[
+let q = 0;
+const questions = [
   "How much do you love me? ❤️",
   "Will you always stay with me? 💍"
 ];
 
-function showQuiz(){
-  window.userName=nameInput.value||"Sargam";
+function goQuiz(){
+  window.userName = document.getElementById("nameInput").value || "Sargam";
   nameCard.classList.add("hidden");
   quizCard.classList.remove("hidden");
-  question.innerText=questions[q];
+  questionEl.innerText = questions[q];
 }
 
 function nextQ(){
   q++;
-  if(q<questions.length){
-    question.innerText=questions[q];
+  if(q < questions.length){
+    questionEl.innerText = questions[q];
   }else{
     quizCard.classList.add("hidden");
-    finalText.innerText=`I Love You ${userName} 🌹❤️`;
+    finalText.innerText = `I Love You ${userName} 🌹❤️`;
     finalCard.classList.remove("hidden");
   }
 }
 
 /* ROSE RAIN */
 setInterval(()=>{
-  const r=document.createElement("div");
+  const r = document.createElement("div");
   r.className="rose";
   r.innerText="🌹";
   r.style.left=Math.random()*100+"vw";
