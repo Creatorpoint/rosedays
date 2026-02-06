@@ -5,7 +5,7 @@
 <title>Happy Rose Day 🌹</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -18,42 +18,45 @@ body{
 }
 .hidden{display:none}
 
-/* ===== INTRO ===== */
+/* INTRO */
 #intro{
   position:fixed;
   inset:0;
+  background:radial-gradient(circle,#ff9a9e,#ff4e78);
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:radial-gradient(circle,#ff9a9e,#ff4e78);
-  z-index:999;
+  z-index:1000;
 }
-#roseBloom{
-  font-size:30px;
-  animation:bloom 2.5s forwards ease-out;
+
+#bigRose{
+  font-size:20px;
+  animation:roseBloom 3s forwards ease-in-out;
 }
-@keyframes bloom{
+
+@keyframes roseBloom{
   0%{transform:scale(0);opacity:0}
-  40%{transform:scale(2.5);opacity:1}
-  70%{transform:scale(1.8)}
-  100%{transform:scale(2)}
+  40%{transform:scale(12);opacity:1}
+  70%{transform:scale(9)}
+  100%{transform:scale(10)}
 }
+
 #typing{
+  margin-top:40px;
   font-family:'Great Vibes',cursive;
   font-size:3.2rem;
-  margin-top:30px;
   min-height:70px;
 }
 
-/* ===== CARD ===== */
+/* CARD */
 .card{
   background:rgba(255,255,255,.18);
   backdrop-filter:blur(12px);
   border-radius:22px;
   padding:25px;
-  max-width:400px;
-  margin:25px auto;
+  max-width:380px;
+  margin:40px auto;
   animation:up .8s ease;
 }
 @keyframes up{
@@ -61,15 +64,13 @@ body{
   to{opacity:1;transform:translateY(0)}
 }
 
-button,input{
+button{
   width:100%;
   padding:14px;
   border:none;
   border-radius:14px;
-  margin-top:12px;
+  margin-top:14px;
   font-size:1rem;
-}
-button{
   background:#ff2f68;
   color:#fff;
   cursor:pointer;
@@ -84,17 +85,6 @@ button:hover{transform:scale(1.05)}
   from{transform:rotate(-6deg)}
   to{transform:rotate(6deg)}
 }
-
-/* ROSE RAIN */
-.rose{
-  position:fixed;
-  top:-30px;
-  font-size:22px;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  to{transform:translateY(110vh)}
-}
 </style>
 </head>
 
@@ -102,7 +92,7 @@ button:hover{transform:scale(1.05)}
 
 <!-- INTRO -->
 <div id="intro">
-  <div id="roseBloom">🌹</div>
+  <div id="bigRose">🌹</div>
   <div id="typing"></div>
 </div>
 
@@ -120,7 +110,7 @@ button:hover{transform:scale(1.05)}
 <!-- QUIZ -->
 <div class="card hidden" id="quizCard">
   <h2>Love Quiz 💕</h2>
-  <p id="question"></p>
+  <p id="qText"></p>
   <button onclick="nextQ()">😍 A lot</button>
   <button onclick="nextQ()">♾️ Infinite</button>
 </div>
@@ -132,15 +122,15 @@ button:hover{transform:scale(1.05)}
 </div>
 
 <script>
-const typing = document.getElementById("typing");
 const intro = document.getElementById("intro");
+const typing = document.getElementById("typing");
 const startCard = document.getElementById("startCard");
 const quizCard = document.getElementById("quizCard");
 const finalCard = document.getElementById("finalCard");
 const music = document.getElementById("music");
-const questionEl = document.getElementById("question");
+const qText = document.getElementById("qText");
 
-/* TYPING TEXT */
+/* TYPING */
 const text = "Happy Rose Day Sargam Jii 🌹";
 let i=0;
 function typeText(){
@@ -151,45 +141,35 @@ function typeText(){
     setTimeout(()=>{
       intro.classList.add("hidden");
       startCard.classList.remove("hidden");
-    },1000);
+    },800);
   }
 }
 setTimeout(typeText,1200);
 
 /* START */
 function startSite(){
-  music.play(); // ✅ music works (user click)
+  music.play();
   startCard.classList.add("hidden");
   quizCard.classList.remove("hidden");
-  questionEl.innerText = "How much do you love me? ❤️";
+  qText.innerText = "How much do you love me? ❤️";
 }
 
 /* QUIZ */
-let q=0;
+let step=0;
 const questions=[
   "How much do you love me? ❤️",
   "Will you always stay with me? 💍"
 ];
+
 function nextQ(){
-  q++;
-  if(q < questions.length){
-    questionEl.innerText = questions[q];
+  step++;
+  if(step < questions.length){
+    qText.innerText = questions[step];
   }else{
     quizCard.classList.add("hidden");
     finalCard.classList.remove("hidden");
   }
 }
-
-/* ROSE RAIN */
-setInterval(()=>{
-  const r=document.createElement("div");
-  r.className="rose";
-  r.innerText="🌹";
-  r.style.left=Math.random()*100+"vw";
-  r.style.animationDuration=3+Math.random()*5+"s";
-  document.body.appendChild(r);
-  setTimeout(()=>r.remove(),8000);
-},350);
 </script>
 
 </body>
