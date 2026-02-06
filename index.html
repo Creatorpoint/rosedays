@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Rose Day 💝</title>
+<title>Happy Rose Day 🌹</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -11,44 +11,49 @@
 body{
   margin:0;
   font-family:Poppins,sans-serif;
-  background:linear-gradient(135deg,#ff4e78,#ff9a9e);
+  background:radial-gradient(circle,#ff9a9e,#ff4e78);
   color:#fff;
   text-align:center;
   overflow:hidden;
 }
 .hidden{display:none}
 
-/* INTRO */
+/* ===== INTRO ===== */
 #intro{
   position:fixed;
   inset:0;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle,#ff9a9e,#ff4e78);
   z-index:999;
 }
-.bigRose{
-  font-size:150px;
-  animation:pulse 2s infinite;
+#roseBloom{
+  font-size:30px;
+  animation:bloom 2.5s forwards ease-out;
 }
-@keyframes pulse{
-  50%{transform:scale(1.2)}
+@keyframes bloom{
+  0%{transform:scale(0);opacity:0}
+  40%{transform:scale(2.5);opacity:1}
+  70%{transform:scale(1.8)}
+  100%{transform:scale(2)}
 }
 #typing{
   font-family:'Great Vibes',cursive;
   font-size:3.2rem;
-  margin-top:20px;
+  margin-top:30px;
+  min-height:70px;
 }
 
-/* CARD */
+/* ===== CARD ===== */
 .card{
-  background:rgba(255,255,255,.2);
-  backdrop-filter:blur(10px);
-  border-radius:20px;
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
   padding:25px;
   max-width:400px;
-  margin:20px auto;
+  margin:25px auto;
   animation:up .8s ease;
 }
 @keyframes up{
@@ -73,11 +78,11 @@ button:hover{transform:scale(1.05)}
 
 .teddy{
   font-size:90px;
-  animation:shake 1s infinite alternate;
+  animation:teddy 1s infinite alternate;
 }
-@keyframes shake{
-  from{transform:rotate(-8deg)}
-  to{transform:rotate(8deg)}
+@keyframes teddy{
+  from{transform:rotate(-6deg)}
+  to{transform:rotate(6deg)}
 }
 
 /* ROSE RAIN */
@@ -97,11 +102,10 @@ button:hover{transform:scale(1.05)}
 
 <!-- INTRO -->
 <div id="intro">
-  <div class="bigRose">🌹</div>
+  <div id="roseBloom">🌹</div>
   <div id="typing"></div>
 </div>
 
-<!-- AUDIO -->
 <audio id="music">
   <source src="song.mp3" type="audio/mpeg">
 </audio>
@@ -109,15 +113,8 @@ button:hover{transform:scale(1.05)}
 <!-- START -->
 <div class="card hidden" id="startCard">
   <div class="teddy">🧸</div>
-  <h2>Tap to Continue 💖</h2>
+  <h2>Tap to Continue 💝</h2>
   <button onclick="startSite()">Continue</button>
-</div>
-
-<!-- NAME -->
-<div class="card hidden" id="nameCard">
-  <h2>Enter Her Name 💝</h2>
-  <input id="nameInput" placeholder="Sargam">
-  <button onclick="goQuiz()">Next 🌹</button>
 </div>
 
 <!-- QUIZ -->
@@ -131,24 +128,21 @@ button:hover{transform:scale(1.05)}
 <!-- FINAL -->
 <div class="card hidden" id="finalCard">
   <div class="teddy">🧸❤️</div>
-  <h2 id="finalText"></h2>
+  <h2>I Love You Sargam Jii 🌹💖</h2>
 </div>
 
 <script>
-/* ELEMENTS */
-const intro = document.getElementById("intro");
 const typing = document.getElementById("typing");
+const intro = document.getElementById("intro");
 const startCard = document.getElementById("startCard");
-const nameCard = document.getElementById("nameCard");
 const quizCard = document.getElementById("quizCard");
 const finalCard = document.getElementById("finalCard");
-const questionEl = document.getElementById("question");
 const music = document.getElementById("music");
+const questionEl = document.getElementById("question");
 
-/* TYPING INTRO */
-const text = "Happy Rose Day Sargam 💝";
-let i = 0;
-
+/* TYPING TEXT */
+const text = "Happy Rose Day Sargam Jii 🌹";
+let i=0;
 function typeText(){
   if(i < text.length){
     typing.innerHTML += text[i++];
@@ -160,43 +154,35 @@ function typeText(){
     },1000);
   }
 }
-typeText();
+setTimeout(typeText,1200);
 
 /* START */
 function startSite(){
-  music.play(); // ✅ user click → music works
+  music.play(); // ✅ music works (user click)
   startCard.classList.add("hidden");
-  nameCard.classList.remove("hidden");
+  quizCard.classList.remove("hidden");
+  questionEl.innerText = "How much do you love me? ❤️";
 }
 
 /* QUIZ */
-let q = 0;
-const questions = [
+let q=0;
+const questions=[
   "How much do you love me? ❤️",
   "Will you always stay with me? 💍"
 ];
-
-function goQuiz(){
-  window.userName = document.getElementById("nameInput").value || "Sargam";
-  nameCard.classList.add("hidden");
-  quizCard.classList.remove("hidden");
-  questionEl.innerText = questions[q];
-}
-
 function nextQ(){
   q++;
   if(q < questions.length){
     questionEl.innerText = questions[q];
   }else{
     quizCard.classList.add("hidden");
-    finalText.innerText = `I Love You ${userName} 🌹❤️`;
     finalCard.classList.remove("hidden");
   }
 }
 
 /* ROSE RAIN */
 setInterval(()=>{
-  const r = document.createElement("div");
+  const r=document.createElement("div");
   r.className="rose";
   r.innerText="🌹";
   r.style.left=Math.random()*100+"vw";
