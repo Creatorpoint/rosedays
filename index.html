@@ -1,113 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rose Day ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:linear-gradient(135deg,#ff4e78,#ff9a9e);
+  color:#fff;
+  text-align:center;
+  overflow-x:hidden;
+}
+header{padding:40px 20px}
+h1{font-family:'Great Vibes',cursive;font-size:3.5rem}
+
+.card{
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  padding:25px;
+  max-width:420px;
+  margin:20px auto;
+}
+input,button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:12px;
+  border:none;
+  font-size:1rem;
+}
+button{
+  background:#ff2f68;
+  color:#fff;
+  cursor:pointer;
+}
+button:hover{transform:scale(1.05)}
+.hidden{display:none}
+
+/* roses */
+.rose{
+  position:fixed;
+  top:-50px;
+  font-size:22px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh)}
+}
+
+/* glow */
+body.glow{
+  animation:glow .6s ease-in-out;
+}
+@keyframes glow{
+  0%,100%{box-shadow:0 0 20px rgba(255,255,255,.3)}
+  50%{box-shadow:0 0 60px rgba(255,255,255,.9)}
+}
+
+/* music wave */
+#musicWave{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:6px;
+}
+.music-bar{
+  width:6px;
+  height:15px;
+  background:#fff;
+  animation:beat 1s infinite;
+}
+.music-bar:nth-child(2){animation-delay:.1s}
+.music-bar:nth-child(3){animation-delay:.2s}
+.music-bar:nth-child(4){animation-delay:.3s}
+@keyframes beat{
+  0%,100%{height:10px}
+  50%{height:35px}
+}
+
+/* fireworks */
+@keyframes firework{
+  to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Happy Rose Day 🌹</h1>
+<p>A little surprise made with love</p>
+</header>
+
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div id="musicWave"></div>
+<button onclick="toggleMusic()" style="position:fixed;top:15px;right:15px">🎵 Music</button>
+
+<div class="card" id="nameCard">
+  <h2>Enter Your Girlfriend's Name 💖</h2>
+  <input id="gfName" placeholder="Her Name">
+  <button onclick="showWish()">Continue</button>
+</div>
+
+<div class="card hidden" id="wishCard">
+  <h2 id="wishText"></h2>
+  <button onclick="showQuiz()">Next 💘</button>
+</div>
+
+<div class="card hidden" id="quizCard">
+  <h2>How much do you love me? 😘</h2>
+  <button onclick="quizAnswer()">Infinity ♾️</button>
+</div>
+
+<div class="card hidden" id="photoCard">
+  <h2>I Love You ❤️</h2>
+  <button onclick="showLove()">I Love You 💖</button>
+  <div id="loveBox" class="hidden">
+    <p>You are my everything 🌹</p>
+    <button onclick="shareWhatsApp()">WhatsApp 💬</button>
+  </div>
+
+  <hr>
+  <input type="file" accept="image/*" onchange="loadPhoto(event)">
+  <img id="photoPreview">
+</div>
+
 <script>
-/* music wave bars */
-const wave = document.getElementById('musicWave');
-for (let i = 0; i < 4; i++) {
-  const bar = document.createElement('div');
-  bar.className = 'music-bar';
-  wave.appendChild(bar);
+/* music wave */
+const wave=document.getElementById("musicWave");
+for(let i=0;i<4;i++){
+  const b=document.createElement("div");
+  b.className="music-bar";
+  wave.appendChild(b);
 }
 
-function showWish() {
-  const name = document.getElementById('gfName').value.trim();
-  if (!name) {
-    alert('Please enter a name ❤️');
-    return;
-  }
+function showWish(){
+  const name=gfName.value.trim();
+  if(!name){alert("Enter name ❤️");return;}
+  window.girlName=name;
+  nameCard.classList.add("hidden");
+  wishText.innerText=`Happy Rose Day ${name} 🌹`;
+  wishCard.classList.remove("hidden");
 
-  window.girlName = name;
-
-  document.getElementById('nameCard').classList.add('hidden');
-  document.getElementById('wishText').innerText = `Happy Rose Day, ${name}! 🌹`;
-  document.getElementById('wishCard').classList.remove('hidden');
-
-  // ✅ MUSIC PLAY (SAFE WAY)
-  const music = document.getElementById('bgMusic');
-  music.muted = false;
-  music.play().catch(() => {
-    alert('Tap Music button 🎵');
-  });
-
-  // glow beat
-  setInterval(() => {
-    document.body.classList.add('glow');
-    setTimeout(() => document.body.classList.remove('glow'), 300);
-  }, 600);
+  bgMusic.play().catch(()=>{});
+  setInterval(()=>{
+    document.body.classList.add("glow");
+    setTimeout(()=>document.body.classList.remove("glow"),300);
+  },600);
 }
 
-function showQuiz() {
-  document.getElementById('wishCard').classList.add('hidden');
-  document.getElementById('quizCard').classList.remove('hidden');
+function showQuiz(){
+  wishCard.classList.add("hidden");
+  quizCard.classList.remove("hidden");
 }
 
-function quizAnswer() {
-  document.getElementById('quizCard').classList.add('hidden');
-  document.getElementById('photoCard').classList.remove('hidden');
+function quizAnswer(){
+  quizCard.classList.add("hidden");
+  photoCard.classList.remove("hidden");
 }
 
-function showLove() {
-  document.getElementById('loveBox').classList.remove('hidden');
-  heartBlast();
+function showLove(){
+  loveBox.classList.remove("hidden");
   fireWorks();
 }
 
-function heartBlast() {
-  for (let i = 0; i < 20; i++) {
-    const heart = document.createElement('div');
-    heart.innerText = '❤️';
-    heart.style.position = 'fixed';
-    heart.style.left = '50%';
-    heart.style.top = '50%';
-    heart.style.fontSize = '24px';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 2000);
-  }
-}
-
-function fireWorks() {
-  for (let i = 0; i < 30; i++) {
-    const p = document.createElement('div');
-    p.innerText = '✨';
-    p.style.position = 'fixed';
-    p.style.left = '50%';
-    p.style.top = '50%';
-    p.style.setProperty('--x', (Math.random() * 400 - 200) + 'px');
-    p.style.setProperty('--y', (Math.random() * 400 - 200) + 'px');
-    p.style.animation = 'firework 1.5s ease-out forwards';
+function fireWorks(){
+  for(let i=0;i<30;i++){
+    const p=document.createElement("div");
+    p.innerText="✨";
+    p.style.position="fixed";
+    p.style.left="50%";
+    p.style.top="50%";
+    p.style.setProperty("--x",(Math.random()*400-200)+"px");
+    p.style.setProperty("--y",(Math.random()*400-200)+"px");
+    p.style.animation="firework 1.5s forwards";
     document.body.appendChild(p);
-    setTimeout(() => p.remove(), 1500);
-  }
-  alert('I Love You ' + window.girlName + ' ❤️');
-}
-
-function toggleMusic() {
-  const music = document.getElementById('bgMusic');
-  if (music.paused) {
-    music.play();
-  } else {
-    music.pause();
+    setTimeout(()=>p.remove(),1500);
   }
 }
 
-function shareWhatsApp() {
-  const text = encodeURIComponent(
-    `Happy Rose Day ❤️ ${window.girlName}, you are my everything 🌹`
+function toggleMusic(){
+  bgMusic.paused?bgMusic.play():bgMusic.pause();
+}
+
+function shareWhatsApp(){
+  const txt=encodeURIComponent(
+    `Happy Rose Day ❤️ ${girlName} 🌹`
   );
-  window.open('https://wa.me/?text=' + text, '_blank');
+  window.open("https://wa.me/?text="+txt);
 }
 
-function loadPhoto(event) {
-  const img = document.getElementById('photoPreview');
-  img.src = URL.createObjectURL(event.target.files[0]);
+function loadPhoto(e){
+  photoPreview.src=URL.createObjectURL(e.target.files[0]);
 }
 
-/* falling roses */
-setInterval(() => {
-  const rose = document.createElement('div');
-  rose.className = 'rose';
-  rose.innerText = '🌹';
-  rose.style.left = Math.random() * 100 + 'vw';
-  rose.style.animationDuration = 3 + Math.random() * 5 + 's';
-  document.body.appendChild(rose);
-  setTimeout(() => rose.remove(), 8000);
-}, 300);
+/* rose rain */
+setInterval(()=>{
+  const r=document.createElement("div");
+  r.className="rose";
+  r.innerText="🌹";
+  r.style.left=Math.random()*100+"vw";
+  r.style.animationDuration=3+Math.random()*5+"s";
+  document.body.appendChild(r);
+  setTimeout(()=>r.remove(),8000);
+},300);
 </script>
+
+</body>
+</html>
