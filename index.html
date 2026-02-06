@@ -168,126 +168,120 @@ body.glow{
   <img id="photoPreview" />
   <p style="margin-top:10px">Forever Us 💑</p>
 </div>
-
+  
 <script>
-// create music animation bars
-const wave=document.getElementById('musicWave');
-for(let i=0;i<4;i++){
-  const bar=document.createElement('div');
-  bar.className='music-bar';
+// ===== Music Wave =====
+const wave = document.getElementById('musicWave');
+for (let i = 0; i < 4; i++) {
+  const bar = document.createElement('div');
+  bar.className = 'music-bar';
   wave.appendChild(bar);
 }
 
-  function showWish() {
-    const name = document.getElementById('gfName').value.trim();
-    if (!name) return alert('Please enter a name ❤️');
-
-    window.girlName = name;
-
-    document.getElementById('nameCard').classList.add('hidden');
-    document.getElementById('wishText').innerText = `Happy Rose Day, ${name}! 🌹`;
-    document.getElementById('wishCard').classList.remove('hidden');
-
-    // Auto play music
-    const music = document.getElementById('bgMusic');
-    music.play();
-    setInterval(()=>{
-      document.body.classList.add('glow');
-      setTimeout(()=>document.body.classList.remove('glow'),300);
-    },600)().catch(()=>{});
-  }! 🌹`;
-    document.getElementById('wishCard').classList.remove('hidden');
+// ===== Show Wish =====
+function showWish() {
+  const name = document.getElementById('gfName').value.trim();
+  if (!name) {
+    alert('Please enter a name ❤️');
+    return;
   }
 
-  function showQuiz() {
-    document.getElementById('wishCard').classList.add('hidden');
-    document.getElementById('quizCard').classList.remove('hidden');
-  }
+  window.girlName = name;
 
-  function quizAnswer() {
-    document.getElementById('quizCard').classList.add('hidden');
-    document.getElementById('photoCard').classList.remove('hidden');
-  }
+  document.getElementById('nameCard').classList.add('hidden');
+  document.getElementById('wishText').innerText = `Happy Rose Day, ${name}! 🌹`;
+  document.getElementById('wishCard').classList.remove('hidden');
 
-  function showLove(){
-    document.getElementById('loveBox').classList.remove('hidden');
-    heartBlast();
-    fireWorks();
-  }
+  const music = document.getElementById('bgMusic');
+  music.play().catch(()=>{});
 
-  function heartBlast(){
-    for(let i=0;i<20;i++){
-      const heart=document.createElement('div');
-      heart.innerText='❤️';
-      heart.style.position='fixed';
-      heart.style.left='50%';
-      heart.style.top='50%';
-      heart.style.fontSize='24px';
-      heart.style.animation='beat .6s infinite';
-      document.body.appendChild(heart);
-      setTimeout(()=>heart.remove(),2000);
-    }
-  }
-
-  function fireWorks(){
-    for(let i=0;i<30;i++){
-      const p=document.createElement('div');
-      p.innerText='✨';
-      p.style.position='fixed';
-      p.style.left='50%';
-      p.style.top='50%';
-      p.style.setProperty('--x',(Math.random()*400-200)+'px');
-      p.style.setProperty('--y',(Math.random()*400-200)+'px');
-      p.style.animation='firework 1.5s ease-out forwards';
-      document.body.appendChild(p);
-      setTimeout(()=>p.remove(),1500);
-    }
-    alert('I Love You '+girlName+' ❤️');
-  }(){
-    for(let i=0;i<30;i++){
-      const heart=document.createElement('div');
-      heart.innerText='❤️';
-      heart.style.position='fixed';
-      heart.style.left=Math.random()*100+'vw';
-      heart.style.top='100vh';
-      heart.style.fontSize='20px';
-      heart.style.animation='heartUp 3s ease forwards';
-      document.body.appendChild(heart);
-      setTimeout(()=>heart.remove(),3000);
-    }
-  }{
-    document.getElementById('loveBox').classList.remove('hidden');
-  }
-
-  function toggleMusic(){
-    const music = document.getElementById('bgMusic');
-    if(music.paused){ music.play(); } else { music.pause(); }
-  }
-
-  function shareWhatsApp(){
-    const text = encodeURIComponent(`Happy Rose Day ❤️ ${window.girlName}, you are my everything 🌹💑`);
-    window.open('https://wa.me/?text=' + text, '_blank');
-  }{
-    const text = encodeURIComponent('Happy Rose Day ❤️ You are my everything 🌹');
-    window.open('https://wa.me/?text=' + text, '_blank');
-  }
-
-  function loadPhoto(event) {
-    const img = document.getElementById('photoPreview');
-    img.src = URL.createObjectURL(event.target.files[0]);
-  }
-
-  // Falling roses animation
   setInterval(() => {
-    const rose = document.createElement('div');
-    rose.className = 'rose';
-    rose.innerText = '🌹';
-    rose.style.left = Math.random() * 100 + 'vw';
-    rose.style.animationDuration = 3 + Math.random() * 5 + 's';
-    document.body.appendChild(rose);
-    setTimeout(() => rose.remove(), 8000);
-  }, 300);
-</script>
+    document.body.classList.add('glow');
+    setTimeout(() => document.body.classList.remove('glow'), 300);
+  }, 600);
+}
 
+// ===== Quiz =====
+function showQuiz() {
+  document.getElementById('wishCard').classList.add('hidden');
+  document.getElementById('quizCard').classList.remove('hidden');
+}
+
+function quizAnswer() {
+  document.getElementById('quizCard').classList.add('hidden');
+  document.getElementById('photoCard').classList.remove('hidden');
+}
+
+// ===== Love Button =====
+function showLove() {
+  document.getElementById('loveBox').classList.remove('hidden');
+  heartBlast();
+  fireWorks();
+}
+
+// ===== Hearts =====
+function heartBlast() {
+  for (let i = 0; i < 20; i++) {
+    const heart = document.createElement('div');
+    heart.innerText = '❤️';
+    heart.style.position = 'fixed';
+    heart.style.left = '50%';
+    heart.style.top = '50%';
+    heart.style.fontSize = '24px';
+    heart.style.transform = `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px)`;
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2000);
+  }
+}
+
+// ===== Fireworks =====
+function fireWorks() {
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.innerText = '✨';
+    p.style.position = 'fixed';
+    p.style.left = '50%';
+    p.style.top = '50%';
+    p.style.setProperty('--x', (Math.random()*400-200)+'px');
+    p.style.setProperty('--y', (Math.random()*400-200)+'px');
+    p.style.animation = 'firework 1.5s ease-out forwards';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1500);
+  }
+  alert('I Love You ' + window.girlName + ' ❤️');
+}
+
+// ===== Music Toggle =====
+function toggleMusic() {
+  const music = document.getElementById('bgMusic');
+  music.paused ? music.play() : music.pause();
+}
+
+// ===== WhatsApp Share =====
+function shareWhatsApp() {
+  const text = encodeURIComponent(
+    `Happy Rose Day ❤️ ${window.girlName}, you are my everything 🌹💑`
+  );
+  window.open('https://wa.me/?text=' + text, '_blank');
+}
+
+// ===== Photo Upload =====
+function loadPhoto(event) {
+  const img = document.getElementById('photoPreview');
+  img.src = URL.createObjectURL(event.target.files[0]);
+}
+
+// ===== Falling Roses =====
+setInterval(() => {
+  const rose = document.createElement('div');
+  rose.className = 'rose';
+  rose.innerText = '🌹';
+  rose.style.left = Math.random() * 100 + 'vw';
+  rose.style.animationDuration = (3 + Math.random() * 5) + 's';
+  document.body.appendChild(rose);
+  setTimeout(() => rose.remove(), 8000);
+}, 300);
+</script>
+ 
 </body>
 </html>
