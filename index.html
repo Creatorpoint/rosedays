@@ -17,22 +17,31 @@ body{
   text-align:center;
   overflow-x:hidden;
 }
-header{padding:40px 20px}
-h1{font-family:'Great Vibes',cursive;font-size:3.5rem}
 
+/* header */
+header{padding:40px 20px}
+h1{font-family:'Great Vibes',cursive;font-size:3.4rem}
+
+/* card */
 .card{
-  background:rgba(255,255,255,.18);
-  backdrop-filter:blur(10px);
-  border-radius:20px;
+  background:rgba(255,255,255,.2);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
   padding:25px;
   max-width:420px;
   margin:20px auto;
+  animation:fadeUp 1s ease;
 }
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
 input,button{
   width:100%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:12px;
+  padding:13px;
+  margin-top:12px;
+  border-radius:14px;
   border:none;
   font-size:1rem;
 }
@@ -44,18 +53,16 @@ button{
 button:hover{transform:scale(1.05)}
 .hidden{display:none}
 
-/* roses */
+/* rose rain */
 .rose{
   position:fixed;
-  top:-50px;
+  top:-40px;
   font-size:22px;
   animation:fall linear infinite;
 }
-@keyframes fall{
-  to{transform:translateY(110vh)}
-}
+@keyframes fall{to{transform:translateY(110vh)}}
 
-/* glow */
+/* glow beat */
 body.glow{
   animation:glow .6s ease-in-out;
 }
@@ -75,7 +82,7 @@ body.glow{
 }
 .music-bar{
   width:6px;
-  height:15px;
+  height:12px;
   background:#fff;
   animation:beat 1s infinite;
 }
@@ -85,6 +92,16 @@ body.glow{
 @keyframes beat{
   0%,100%{height:10px}
   50%{height:35px}
+}
+
+/* teddy */
+.teddy{
+  font-size:90px;
+  animation:teddyDance 1.2s infinite alternate;
+}
+@keyframes teddyDance{
+  from{transform:rotate(-10deg) scale(1)}
+  to{transform:rotate(10deg) scale(1.05)}
 }
 
 /* fireworks */
@@ -106,39 +123,42 @@ body.glow{
 </audio>
 
 <div id="musicWave"></div>
-<button onclick="toggleMusic()" style="position:fixed;top:15px;right:15px">🎵 Music</button>
 
-<div class="card" id="nameCard">
-  <h2>Enter Your Girlfriend's Name 💖</h2>
-  <input id="gfName" placeholder="Her Name">
-  <button onclick="showWish()">Continue</button>
+<div class="card" id="startCard">
+  <div class="teddy">🧸</div>
+  <h2>Ready for a surprise? 💖</h2>
+  <button onclick="startSurprise()">Start Surprise ❤️</button>
+</div>
+
+<div class="card hidden" id="nameCard">
+  <h2>Enter Your Girlfriend's Name 💕</h2>
+  <input id="gfName" placeholder="Her beautiful name">
+  <button onclick="showWish()">Continue 🌹</button>
 </div>
 
 <div class="card hidden" id="wishCard">
   <h2 id="wishText"></h2>
-  <button onclick="showQuiz()">Next 💘</button>
+  <p>You are the most beautiful rose in my life 🌹</p>
+  <button onclick="showQuiz()">Let's Play a Game 🎮</button>
 </div>
 
 <div class="card hidden" id="quizCard">
-  <h2>How much do you love me? 😘</h2>
-  <button onclick="quizAnswer()">Infinity ♾️</button>
+  <div class="teddy">🧸</div>
+  <h2>Love Quiz 💘</h2>
+  <p>What am I to you? 🥺</p>
+  <button onclick="quizAnswer()">My Everything ❤️</button>
+  <button onclick="quizAnswer()">My Forever ♾️</button>
 </div>
 
-<div class="card hidden" id="photoCard">
-  <h2>I Love You ❤️</h2>
-  <button onclick="showLove()">I Love You 💖</button>
-  <div id="loveBox" class="hidden">
-    <p>You are my everything 🌹</p>
-    <button onclick="shareWhatsApp()">WhatsApp 💬</button>
-  </div>
-
-  <hr>
-  <input type="file" accept="image/*" onchange="loadPhoto(event)">
-  <img id="photoPreview">
+<div class="card hidden" id="finalCard">
+  <div class="teddy">🧸💖</div>
+  <h2>I Love You <span id="finalName"></span> ❤️</h2>
+  <p>Forever & Always 🌹</p>
+  <button onclick="shareWhatsApp()">Share on WhatsApp 💬</button>
 </div>
 
 <script>
-/* music wave */
+/* music bars */
 const wave=document.getElementById("musicWave");
 for(let i=0;i<4;i++){
   const b=document.createElement("div");
@@ -146,19 +166,26 @@ for(let i=0;i<4;i++){
   wave.appendChild(b);
 }
 
-function showWish(){
-  const name=gfName.value.trim();
-  if(!name){alert("Enter name ❤️");return;}
-  window.girlName=name;
-  nameCard.classList.add("hidden");
-  wishText.innerText=`Happy Rose Day ${name} 🌹`;
-  wishCard.classList.remove("hidden");
+/* start */
+function startSurprise(){
+  bgMusic.play().catch(()=>alert("Tap again ❤️"));
+  startCard.classList.add("hidden");
+  nameCard.classList.remove("hidden");
 
-  bgMusic.play().catch(()=>{});
   setInterval(()=>{
     document.body.classList.add("glow");
     setTimeout(()=>document.body.classList.remove("glow"),300);
   },600);
+}
+
+function showWish(){
+  const name=gfName.value.trim();
+  if(!name){alert("Enter name ❤️");return;}
+  window.girlName=name;
+
+  nameCard.classList.add("hidden");
+  wishText.innerText=`Happy Rose Day ${name} 🌹`;
+  wishCard.classList.remove("hidden");
 }
 
 function showQuiz(){
@@ -168,16 +195,13 @@ function showQuiz(){
 
 function quizAnswer(){
   quizCard.classList.add("hidden");
-  photoCard.classList.remove("hidden");
-}
-
-function showLove(){
-  loveBox.classList.remove("hidden");
+  finalName.innerText=girlName;
+  finalCard.classList.remove("hidden");
   fireWorks();
 }
 
 function fireWorks(){
-  for(let i=0;i<30;i++){
+  for(let i=0;i<35;i++){
     const p=document.createElement("div");
     p.innerText="✨";
     p.style.position="fixed";
@@ -191,19 +215,11 @@ function fireWorks(){
   }
 }
 
-function toggleMusic(){
-  bgMusic.paused?bgMusic.play():bgMusic.pause();
-}
-
 function shareWhatsApp(){
   const txt=encodeURIComponent(
-    `Happy Rose Day ❤️ ${girlName} 🌹`
+    `Happy Rose Day ❤️ ${girlName}\nYou are my forever 🌹🧸`
   );
   window.open("https://wa.me/?text="+txt);
-}
-
-function loadPhoto(e){
-  photoPreview.src=URL.createObjectURL(e.target.files[0]);
 }
 
 /* rose rain */
