@@ -37,23 +37,21 @@ body{
   0%,100%{transform:scale(1);filter:drop-shadow(0 0 20px #fff)}
   50%{transform:scale(1.15);filter:drop-shadow(0 0 50px #fff)}
 }
+
+/* TYPING TEXT */
 .intro-text{
   font-family:'Great Vibes',cursive;
-  font-size:3.5rem;
+  font-size:3.6rem;
   margin-top:20px;
-  opacity:0;
-  animation:textShow 2s ease forwards;
-  animation-delay:2.5s;
-}
-@keyframes textShow{
-  to{opacity:1;transform:scale(1.05)}
+  min-height:70px;
+  text-shadow:0 0 20px #fff;
 }
 
-/* HEADER */
+/* MAIN */
+.hidden{display:none}
 header{padding:40px 20px}
-h1{font-family:'Great Vibes',cursive;font-size:3.4rem}
+h1{font-family:'Great Vibes',cursive;font-size:3.2rem}
 
-/* CARD */
 .card{
   background:rgba(255,255,255,.2);
   backdrop-filter:blur(12px);
@@ -67,9 +65,8 @@ h1{font-family:'Great Vibes',cursive;font-size:3.4rem}
   from{opacity:0;transform:translateY(40px)}
   to{opacity:1;transform:translateY(0)}
 }
-.hidden{display:none}
 
-input,button{
+button,input{
   width:100%;
   padding:13px;
   margin-top:12px;
@@ -84,26 +81,16 @@ button{
 }
 button:hover{transform:scale(1.05)}
 
-/* TEDDY */
 .teddy{
   font-size:90px;
-  animation:teddyDance 1.2s infinite alternate;
+  animation:teddy 1s infinite alternate;
 }
-@keyframes teddyDance{
-  from{transform:rotate(-10deg)}
-  to{transform:rotate(10deg)}
+@keyframes teddy{
+  from{transform:rotate(-8deg)}
+  to{transform:rotate(8deg)}
 }
 
-/* ROSE RAIN */
-.rose{
-  position:fixed;
-  top:-40px;
-  font-size:22px;
-  animation:fall linear infinite;
-}
-@keyframes fall{to{transform:translateY(110vh)}}
-
-/* MUSIC */
+/* MUSIC WAVE */
 #musicWave{
   position:fixed;
   bottom:20px;
@@ -122,15 +109,17 @@ button:hover{transform:scale(1.05)}
 .music-bar:nth-child(3){animation-delay:.2s}
 .music-bar:nth-child(4){animation-delay:.3s}
 @keyframes beat{
-  0%,100%{height:10px}
   50%{height:35px}
 }
-body.glow{
-  animation:glow .6s ease-in-out;
+
+/* ROSE RAIN */
+.rose{
+  position:fixed;
+  top:-40px;
+  font-size:22px;
+  animation:fall linear infinite;
 }
-@keyframes glow{
-  50%{box-shadow:0 0 60px rgba(255,255,255,.9)}
-}
+@keyframes fall{to{transform:translateY(110vh)}}
 
 /* FIREWORK */
 @keyframes firework{
@@ -141,61 +130,41 @@ body.glow{
 
 <body>
 
-<!-- INTRO SCREEN -->
+<!-- INTRO -->
 <div id="intro">
   <div class="big-rose">🌹</div>
-  <div class="intro-text">Happy Rose Day Sargam 💝</div>
+  <div class="intro-text" id="typingText"></div>
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="song.mp3" type="audio/mpeg">
+<!-- MUSIC (FIXED) -->
+<audio id="bgMusic" preload="auto">
+  <source src="./song.mp3" type="audio/mpeg">
 </audio>
 
 <div id="musicWave"></div>
 
 <header class="hidden" id="mainHeader">
-  <h1>Happy Rose Day 🌹</h1>
-  <p>A little surprise made with love</p>
+  <h1>Happy Rose Day Cutie 🌹</h1>
 </header>
 
 <div class="card hidden" id="startCard">
   <div class="teddy">🧸</div>
-  <h2>Ready for a surprise? 💖</h2>
-  <button onclick="startSurprise()">Start Surprise ❤️</button>
+  <h2>Tap to start ❤️</h2>
+  <button onclick="startAll()">Start Surprise 💝</button>
 </div>
 
 <div class="card hidden" id="nameCard">
-  <h2>Enter Your Name 💕</h2>
+  <h2>Your Name 🌸</h2>
   <input id="gfName" placeholder="Sargam">
-  <button onclick="showWish()">Continue 🌹</button>
-</div>
-
-<div class="card hidden" id="wishCard">
-  <h2 id="wishText"></h2>
-  <button onclick="showQuiz()">Play Love Quiz 💘</button>
-</div>
-
-<div class="card hidden" id="quizCard">
-  <div class="teddy">🧸</div>
-  <h2>What am I to you? 💝</h2>
-  <button onclick="quizAnswer()">My Forever ❤️</button>
-  <button onclick="quizAnswer()">My World 🌍</button>
+  <button onclick="showWish()">Next 🌹</button>
 </div>
 
 <div class="card hidden" id="finalCard">
   <div class="teddy">🧸💖</div>
-  <h2>I Love You <span id="finalName"></span> ❤️</h2>
-  <button onclick="shareWhatsApp()">Share on WhatsApp 💬</button>
+  <h2 id="finalText"></h2>
 </div>
 
 <script>
-/* INTRO REMOVE */
-setTimeout(()=>{
-  intro.style.display="none";
-  mainHeader.classList.remove("hidden");
-  startCard.classList.remove("hidden");
-},5000);
-
 /* MUSIC BARS */
 const wave=document.getElementById("musicWave");
 for(let i=0;i<4;i++){
@@ -204,36 +173,43 @@ for(let i=0;i<4;i++){
   wave.appendChild(b);
 }
 
-function startSurprise(){
-  bgMusic.play();
-  setInterval(()=>{
-    document.body.classList.add("glow");
-    setTimeout(()=>document.body.classList.remove("glow"),300);
-  },600);
+/* TYPING EFFECT */
+const text="Happy Rose Day Sargam 💝";
+let i=0;
+function typing(){
+  if(i<text.length){
+    typingText.innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typing,120);
+  }else{
+    setTimeout(()=>{
+      intro.style.display="none";
+      mainHeader.classList.remove("hidden");
+      startCard.classList.remove("hidden");
+    },1000);
+  }
+}
+typing();
+
+/* START EVERYTHING */
+function startAll(){
+  bgMusic.play(); // ✅ works because button click
+  startCard.classList.add("hidden");
+  nameCard.classList.remove("hidden");
 }
 
+/* SHOW FINAL */
 function showWish(){
   const name=gfName.value||"Sargam";
-  window.girlName=name;
   nameCard.classList.add("hidden");
-  wishText.innerText=`Happy Rose Day ${name} 💝`;
-  wishCard.classList.remove("hidden");
-}
-
-function showQuiz(){
-  wishCard.classList.add("hidden");
-  quizCard.classList.remove("hidden");
-}
-
-function quizAnswer(){
-  quizCard.classList.add("hidden");
-  finalName.innerText=girlName;
+  finalText.innerText=`I Love You ${name} ❤️🌹`;
   finalCard.classList.remove("hidden");
-  fireWorks();
+  fireworks();
 }
 
-function fireWorks(){
-  for(let i=0;i<35;i++){
+/* FIREWORK */
+function fireworks(){
+  for(let i=0;i<30;i++){
     const p=document.createElement("div");
     p.innerText="✨";
     p.style.position="fixed";
@@ -247,13 +223,6 @@ function fireWorks(){
   }
 }
 
-function shareWhatsApp(){
-  const txt=encodeURIComponent(
-    `Happy Rose Day 💝 ${girlName}\nYou are my forever 🌹`
-  );
-  window.open("https://wa.me/?text="+txt);
-}
-
 /* ROSE RAIN */
 setInterval(()=>{
   const r=document.createElement("div");
@@ -263,7 +232,7 @@ setInterval(()=>{
   r.style.animationDuration=3+Math.random()*5+"s";
   document.body.appendChild(r);
   setTimeout(()=>r.remove(),8000);
-},300);
+},350);
 </script>
 
 </body>
