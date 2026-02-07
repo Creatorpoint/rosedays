@@ -2,73 +2,73 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Propose Day 💍</title>
+<title>Propose Day 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
 body{
   margin:0;
   font-family:Poppins,sans-serif;
-  background:radial-gradient(circle at top,#ffb6c1,#ff4d6d);
+  background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
   color:#fff;
   text-align:center;
   overflow:hidden;
 }
 
-/* HEART BACKGROUND */
-.heart{
+/* STAR HEART BG */
+.star{
   position:fixed;
-  bottom:-50px;
-  font-size:22px;
-  animation:float linear infinite;
+  top:-20px;
+  font-size:18px;
   opacity:.8;
+  animation:fall linear infinite;
 }
-@keyframes float{
-  to{transform:translateY(-120vh) scale(1.5);opacity:0}
+@keyframes fall{
+  to{transform:translateY(120vh) rotate(360deg);opacity:0}
 }
 
 /* INTRO */
 #intro{
   position:fixed;
   inset:0;
-  background:linear-gradient(135deg,#ff4d6d,#ff8fab);
+  background:radial-gradient(circle,#ff5f6d,#ffc371);
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
   z-index:999;
 }
-.ring{
-  font-size:120px;
-  animation:ring 2s infinite;
-}
-@keyframes ring{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.15) rotate(5deg)}
-}
-#type{
-  font-family:'Great Vibes',cursive;
-  font-size:3.2rem;
+#typing{
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem;
   margin-top:20px;
+  text-shadow:0 0 30px #fff;
   min-height:80px;
-  text-shadow:0 0 25px #fff;
+}
+.heart-big{
+  font-size:120px;
+  animation:pulse 1.8s infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.2)}
 }
 
-/* CARD */
+/* CARDS */
 .card{
-  background:rgba(255,255,255,.2);
-  backdrop-filter:blur(12px);
-  border-radius:25px;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(15px);
+  border-radius:26px;
   padding:30px;
   max-width:420px;
-  margin:20px auto;
-  animation:fadeUp 1s ease;
+  margin:40px auto;
+  animation:slide 1s ease;
 }
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
+@keyframes slide{
+  from{opacity:0;transform:translateY(50px)}
   to{opacity:1;transform:translateY(0)}
 }
 .hidden{display:none}
@@ -77,40 +77,45 @@ button,input{
   width:100%;
   padding:14px;
   margin-top:14px;
-  border-radius:18px;
+  border-radius:20px;
   border:none;
   font-size:1rem;
 }
 button{
-  background:#ff1e56;
+  background:#ff416c;
   color:#fff;
   cursor:pointer;
 }
 button:hover{transform:scale(1.06)}
 
 .teddy{
-  font-size:90px;
-  animation:teddy 1s infinite alternate;
+  font-size:85px;
+  animation:wiggle 1s infinite alternate;
 }
-@keyframes teddy{
-  from{transform:rotate(-8deg)}
-  to{transform:rotate(8deg)}
+@keyframes wiggle{
+  from{transform:rotate(-6deg)}
+  to{transform:rotate(6deg)}
 }
 
-/* FIREWORK TEXT */
-.fire{
-  position:fixed;
-  font-family:'Great Vibes',cursive;
-  font-size:3.5rem;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  animation:boom 2s forwards;
+/* GLOW HEART */
+.glow-heart{
+  font-size:70px;
+  animation:glow 1.2s infinite;
 }
-@keyframes boom{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}
-  50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}
-  100%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+@keyframes glow{
+  0%,100%{filter:drop-shadow(0 0 10px #ff9a9e)}
+  50%{filter:drop-shadow(0 0 35px #fff)}
+}
+
+/* FINAL TEXT */
+.final{
+  font-family:'Playfair Display',serif;
+  font-size:2.6rem;
+  animation:fade 2s ease;
+}
+@keyframes fade{
+  from{opacity:0}
+  to{opacity:1}
 }
 </style>
 </head>
@@ -119,48 +124,53 @@ button:hover{transform:scale(1.06)}
 
 <!-- INTRO -->
 <div id="intro">
-  <div class="ring">💍</div>
-  <div id="type"></div>
+  <div class="heart-big">💖</div>
+  <div id="typing"></div>
 </div>
 
 <audio id="bgMusic" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
+<!-- STEP 1 -->
 <div class="card hidden" id="startCard">
   <div class="teddy">🧸</div>
-  <h2>Someone wants to ask you something… 💕</h2>
-  <button onclick="start()">Continue 💖</button>
+  <h2>Someone has a question for you 💌</h2>
+  <button onclick="start()">Open 💕</button>
 </div>
 
+<!-- STEP 2 -->
 <div class="card hidden" id="nameCard">
-  <h2>Your Name 💗</h2>
-  <input id="gfName" placeholder="Her beautiful name">
-  <button onclick="next()">Next 💍</button>
+  <h2>Your Name 🌸</h2>
+  <input id="gfName" placeholder="Sargam Jii">
+  <button onclick="next()">Continue 💖</button>
 </div>
 
-<div class="card hidden" id="quizCard">
-  <h2>One Question 🥺</h2>
-  <p>If I hold your hand, will you hold it forever?</p>
-  <button onclick="yes()">YES 😍</button>
-  <button onclick="yes()">Obviously YES 💞</button>
+<!-- STEP 3 QUESTION -->
+<div class="card hidden" id="questionCard">
+  <div class="glow-heart">❤️</div>
+  <h2>Romantic Question 💞</h2>
+  <p>If my heart was a home,<br> would you live in it forever? 🥺</p>
+  <button onclick="answer()">Yes, Forever 💍</button>
+  <button onclick="answer()">I already do 💕</button>
 </div>
 
+<!-- FINAL -->
 <div class="card hidden" id="finalCard">
   <div class="teddy">🧸💖</div>
-  <h2 id="finalText"></h2>
-  <p>Will you be mine forever? 💍🌹</p>
+  <div class="final" id="finalText"></div>
+  <p>Will you be mine forever? 💍</p>
 </div>
 
 <script>
 /* INTRO TYPING */
-const text="Happy Propose Day 💍";
+const introText="Happy Propose Day 💖";
 let i=0;
-function typing(){
-  if(i<text.length){
-    type.innerHTML+=text.charAt(i);
+function type(){
+  if(i<introText.length){
+    typing.innerHTML+=introText.charAt(i);
     i++;
-    setTimeout(typing,120);
+    setTimeout(type,120);
   }else{
     setTimeout(()=>{
       intro.style.display="none";
@@ -168,7 +178,7 @@ function typing(){
     },800);
   }
 }
-typing();
+type();
 
 /* START */
 function start(){
@@ -179,38 +189,29 @@ function start(){
 
 /* NEXT */
 function next(){
-  const name=gfName.value||"My Love";
-  window.gname=name;
+  const n=gfName.value||"My Love";
+  window.nameX=n;
   nameCard.classList.add("hidden");
-  quizCard.classList.remove("hidden");
+  questionCard.classList.remove("hidden");
 }
 
-/* YES */
-function yes(){
-  quizCard.classList.add("hidden");
-  finalText.innerText=`${gname}, I Love You 💖`;
+/* ANSWER */
+function answer(){
+  questionCard.classList.add("hidden");
+  finalText.innerText=`${nameX}, I Love You 💖`;
   finalCard.classList.remove("hidden");
-  fireText();
 }
 
-/* FIRE TEXT */
-function fireText(){
-  const f=document.createElement("div");
-  f.className="fire";
-  f.innerText=`${gname} 💍`;
-  document.body.appendChild(f);
-}
-
-/* HEART FLOAT */
+/* FALLING HEART STARS */
 setInterval(()=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerText="❤️";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=4+Math.random()*4+"s";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),8000);
-},300);
+  const s=document.createElement("div");
+  s.className="star";
+  s.innerText="💗";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=4+Math.random()*4+"s";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),8000);
+},350);
 </script>
 
 </body>
