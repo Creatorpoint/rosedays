@@ -2,215 +2,199 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Propose Day Special 💍</title>
+<title>Proposal for Sargam Jii 💝</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
+*{box-sizing:border-box}
 body{
-    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-    height:100vh;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  color:#fff;
+  text-align:center;
+  overflow:hidden;
 }
 
-.hidden{display:none;}
-
-.center{
-    text-align:center;
-    padding:20px;
+/* INTRO */
+#intro{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
 }
 
-/* Ring */
 .ring{
-    width:180px;
-    animation:zoomRing 3s ease forwards;
+  font-size:120px;
+  animation:ringZoom 2.5s ease forwards;
+}
+@keyframes ringZoom{
+  0%{transform:scale(0)}
+  60%{transform:scale(1.2)}
+  100%{transform:scale(1)}
 }
 
-@keyframes zoomRing{
-    0%{transform:scale(0);opacity:0;}
-    100%{transform:scale(1);opacity:1;}
+#typing{
+  font-family:'Great Vibes',cursive;
+  font-size:3rem;
+  margin-top:20px;
+  min-height:60px;
+  text-shadow:0 0 15px #fff;
 }
 
-/* Typing */
-.typing{
-    font-family:'Great Vibes',cursive;
-    font-size:52px;
-    margin-top:20px;
-    white-space:nowrap;
-    overflow:hidden;
-    border-right:3px solid #fff;
-    width:0;
-    animation:typing 3s steps(30,end) forwards, blink 0.7s infinite;
+/* MAIN */
+.hidden{display:none}
+.card{
+  background:rgba(255,255,255,.2);
+  backdrop-filter:blur(10px);
+  border-radius:22px;
+  padding:25px;
+  max-width:420px;
+  margin:20px auto;
+  animation:fadeUp 1s ease;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-@keyframes typing{
-    to{width:100%;}
-}
-@keyframes blink{
-    50%{border-color:transparent;}
-}
-
-/* Questions */
-.question{
-    font-size:24px;
-    margin:25px 0;
-}
-
-/* Buttons */
-.btns{
-    margin-top:20px;
+input,button{
+  width:100%;
+  padding:13px;
+  margin-top:12px;
+  border-radius:14px;
+  border:none;
+  font-size:1rem;
 }
 
 button{
-    padding:12px 30px;
-    border:none;
-    border-radius:30px;
-    font-size:18px;
-    cursor:pointer;
-    margin:10px;
+  background:#ff4e78;
+  color:#fff;
+  cursor:pointer;
+}
+button:hover{transform:scale(1.05)}
+
+.teddy{
+  font-size:90px;
+  animation:teddyDance 1.2s infinite alternate;
+}
+@keyframes teddyDance{
+  from{transform:rotate(-8deg)}
+  to{transform:rotate(8deg)}
 }
 
-.yes{
-    background:#ff4d6d;
-    color:white;
-}
-
-.no{
-    background:#fff;
-    color:#ff4d6d;
-    position:absolute;
-}
-
-/* Panda */
-.panda{
-    width:160px;
-    margin:20px auto;
-    animation:bounce 2s infinite;
-}
-@keyframes bounce{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-15px);}
-}
-
-/* Final */
-.finalText{
-    font-family:'Great Vibes',cursive;
-    font-size:70px;
-    animation:glow 1.5s infinite alternate;
-}
-
-@keyframes glow{
-    from{text-shadow:0 0 10px #fff;}
-    to{text-shadow:0 0 30px #ff005d;}
-}
-
-/* Banner */
-.banner{
-    background:rgba(255,255,255,0.2);
-    padding:20px;
-    border-radius:20px;
-    margin-top:20px;
-}
-
-/* Flowers */
-.flower{
-    position:fixed;
-    top:-50px;
-    font-size:25px;
-    animation:fall linear infinite;
+/* ROSE & FLOWER RAIN */
+.fall{
+  position:fixed;
+  top:-40px;
+  animation:fall linear infinite;
 }
 @keyframes fall{
-    to{transform:translateY(110vh);}
+  to{transform:translateY(110vh)}
+}
+
+/* FIREWORK TEXT */
+.fireText{
+  font-family:'Great Vibes',cursive;
+  font-size:3.5rem;
+  animation:glow 1s infinite alternate;
+}
+@keyframes glow{
+  from{text-shadow:0 0 10px #fff}
+  to{text-shadow:0 0 30px #fff}
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
-<audio id="song" src="song.mp3"></audio>
-
 <!-- INTRO -->
-<div id="intro" class="center">
-    <img src="https://i.imgur.com/7I5Yc5N.png" class="ring">
-    <div class="typing">Sargam 💝</div>
+<div id="intro">
+  <div class="ring">💍</div>
+  <div id="typing"></div>
 </div>
 
-<!-- QUESTIONS -->
-<div id="quiz" class="center hidden">
-    <img src="https://i.imgur.com/jYy1Y6G.png" class="panda">
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 
-    <div class="question">Tum meri zindagi ka sabse pyara hissa banogi? 💍</div>
-
-    <div class="btns">
-        <button class="yes" onclick="final()">YES 💖</button>
-        <button class="no" id="noBtn">NO 🙈</button>
-    </div>
+<!-- PROPOSAL -->
+<div class="card hidden" id="proposal">
+  <div class="teddy">🧸💝</div>
+  <h2>Tum meri zindagi ka sabse pyara hissa banogi? 💍</h2>
+  <input id="name" placeholder="Sargam Jii">
+  <button onclick="yesClick()">YES 💖</button>
+  <button onclick="alert('Socho dobara 😜')">NO 🙈</button>
 </div>
 
 <!-- FINAL -->
-<div id="final" class="center hidden">
-    <div class="finalText">I Love You 💝</div>
-
-    <div class="banner">
-        <p>
-            जुदाई सहने की आदत नहीं है,<br>
-            बिन तेरे रहने की चाहत नहीं है,<br>
-            चाहत है सिर्फ तेरे साथ जीने की,<br>
-            हमारी कोई खुआइस नहीं है.....🤭 💖
-        </p>
-    </div>
+<div class="card hidden" id="final">
+  <div class="fireText">Sargam Jii 💝</div>
+  <h2>I Love You ❤️</h2>
+  <p>Har din tumhari muskaan meri duniya roshan karti hai 🌹</p>
 </div>
 
 <script>
-const song = document.getElementById("song");
+/* TYPING */
+const text="Sargam Jii 💝";
+let i=0;
+function typing(){
+  if(i<text.length){
+    typingDiv.innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typing,120);
+  }else{
+    setTimeout(()=>{
+      intro.style.display="none";
+      proposal.classList.remove("hidden");
+      bgMusic.play().catch(()=>{});
+    },800);
+  }
+}
+const typingDiv=document.getElementById("typing");
+typing();
 
-setTimeout(()=>{
-    song.play();
-},500);
-
-setTimeout(()=>{
-    document.getElementById("intro").classList.add("hidden");
-    document.getElementById("quiz").classList.remove("hidden");
-},4500);
-
-/* NO Button Run */
-const noBtn = document.getElementById("noBtn");
-noBtn.addEventListener("mouseover",()=>{
-    const x = Math.random()*80;
-    const y = Math.random()*80;
-    noBtn.style.left = x+"%";
-    noBtn.style.top = y+"%";
-});
-
-/* Final */
-function final(){
-    document.getElementById("quiz").classList.add("hidden");
-    document.getElementById("final").classList.remove("hidden");
-    flowerRain();
+/* YES CLICK */
+function yesClick(){
+  proposal.classList.add("hidden");
+  final.classList.remove("hidden");
+  flowerRain();
+  fireworks();
 }
 
-/* Flower Rain */
+/* FLOWERS */
 function flowerRain(){
-    for(let i=0;i<30;i++){
-        let f = document.createElement("div");
-        f.innerHTML="🌸";
-        f.className="flower";
-        f.style.left=Math.random()*100+"%";
-        f.style.animationDuration=(3+Math.random()*3)+"s";
-        document.body.appendChild(f);
-    }
+  setInterval(()=>{
+    const f=document.createElement("div");
+    f.className="fall";
+    f.innerText="🌸";
+    f.style.left=Math.random()*100+"vw";
+    f.style.fontSize=20+Math.random()*20+"px";
+    f.style.animationDuration=4+Math.random()*4+"s";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),8000);
+  },250);
+}
+
+/* FIREWORK SPARKLE */
+function fireworks(){
+  for(let i=0;i<30;i++){
+    const s=document.createElement("div");
+    s.innerText="✨";
+    s.style.position="fixed";
+    s.style.left="50%";
+    s.style.top="50%";
+    s.style.transform=`translate(${Math.random()*400-200}px,${Math.random()*400-200}px)`;
+    s.style.fontSize="20px";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),1500);
+  }
 }
 </script>
 
