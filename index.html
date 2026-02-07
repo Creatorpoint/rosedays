@@ -63,13 +63,16 @@ body{
   to{opacity:1;transform:translateY(0)}
 }
 
-button{
+input,button{
   width:100%;
   padding:14px;
   margin-top:14px;
   border-radius:16px;
   border:none;
   font-size:1rem;
+}
+
+button{
   background:linear-gradient(135deg,#ff4ecd,#ff85f1);
   color:#fff;
   cursor:pointer;
@@ -142,6 +145,7 @@ button:hover{transform:scale(1.06)}
 <div class="card hidden" id="proposal">
   <div class="teddy">🧸💝</div>
   <h2>Tum meri zindagi ka sabse pyara hissa banogi? 💍</h2>
+  <input id="name" placeholder="Sargam Jii">
   <button onclick="yesClick()">YES 💖</button>
   <button onclick="alert('Itni aasani se NO nahi chalega 😜')">NO 🙈</button>
 </div>
@@ -150,12 +154,13 @@ button:hover{transform:scale(1.06)}
 <div class="card hidden" id="final">
   <div class="fireText">Sargam Jii 💝</div>
   <h2>I Love You ❤️</h2>
+
   <div class="shayari-box" id="shayari"></div>
 </div>
 
 <script>
 /* INTRO TYPING */
-const introText="Happy Propose Day SARGAM JII 💝";
+const introText="CUTIE 🥰 💝";
 let i=0;
 const typingDiv=document.getElementById("typing");
 
@@ -169,7 +174,7 @@ function typing(){
       intro.style.display="none";
       proposal.classList.remove("hidden");
       bgMusic.play().catch(()=>{});
-    },1200);
+    },900);
   }
 }
 typing();
@@ -203,4 +208,14 @@ const shayariText=`जुदाई सहने की आदत नहीं �
 हमारी कोई ख्वाहिश नहीं है..... 🤭`;
 
 let s=0;
-function typeSh
+function typeShayari(){
+  if(s<shayariText.length){
+    shayari.innerHTML+=shayariText.charAt(s)==="\n"?"<br>":shayariText.charAt(s);
+    s++;
+    setTimeout(typeShayari,70);
+  }
+}
+</script>
+
+</body>
+</html>
