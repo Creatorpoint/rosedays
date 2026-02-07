@@ -2,216 +2,215 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Propose Day 💍</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propose Day Special 💍</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
 body{
-  margin:0;
-  font-family:Poppins,sans-serif;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3);
-  color:#fff;
-  text-align:center;
-  overflow:hidden;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
 }
 
-/* INTRO */
-#intro{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
+.hidden{display:none;}
+
+.center{
+    text-align:center;
+    padding:20px;
 }
+
+/* Ring */
 .ring{
-  font-size:160px;
-  animation:zoom 2s ease forwards;
-}
-@keyframes zoom{
-  from{transform:scale(0);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-#typing{
-  font-family:'Great Vibes',cursive;
-  font-size:3.5rem;
-  margin-top:20px;
-  min-height:80px;
-  text-shadow:0 0 20px #fff;
+    width:180px;
+    animation:zoomRing 3s ease forwards;
 }
 
-/* CARD */
-.card{
-  background:rgba(255,255,255,.2);
-  backdrop-filter:blur(16px);
-  border-radius:26px;
-  padding:30px;
-  max-width:420px;
-  margin:80px auto;
-  animation:fadeUp 1s ease;
+@keyframes zoomRing{
+    0%{transform:scale(0);opacity:0;}
+    100%{transform:scale(1);opacity:1;}
 }
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:translateY(0)}
+
+/* Typing */
+.typing{
+    font-family:'Great Vibes',cursive;
+    font-size:52px;
+    margin-top:20px;
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:3px solid #fff;
+    width:0;
+    animation:typing 3s steps(30,end) forwards, blink 0.7s infinite;
 }
-.hidden{display:none}
+
+@keyframes typing{
+    to{width:100%;}
+}
+@keyframes blink{
+    50%{border-color:transparent;}
+}
+
+/* Questions */
+.question{
+    font-size:24px;
+    margin:25px 0;
+}
+
+/* Buttons */
+.btns{
+    margin-top:20px;
+}
 
 button{
-  width:100%;
-  padding:14px;
-  margin-top:15px;
-  border-radius:20px;
-  border:none;
-  font-size:1rem;
-  background:#ff4b7d;
-  color:#fff;
-  cursor:pointer;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    font-size:18px;
+    cursor:pointer;
+    margin:10px;
 }
-button:hover{transform:scale(1.05)}
 
+.yes{
+    background:#ff4d6d;
+    color:white;
+}
+
+.no{
+    background:#fff;
+    color:#ff4d6d;
+    position:absolute;
+}
+
+/* Panda */
 .panda{
-  font-size:90px;
-  animation:panda 1s infinite alternate;
+    width:160px;
+    margin:20px auto;
+    animation:bounce 2s infinite;
 }
-@keyframes panda{
-  from{transform:rotate(-6deg)}
-  to{transform:rotate(6deg)}
-}
-
-/* FINAL */
-.final-ring{
-  font-size:150px;
-  animation:zoom 2s ease forwards;
-}
-.love{
-  font-family:'Great Vibes',cursive;
-  font-size:3.5rem;
-  margin-top:20px;
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
 }
 
-/* FLOWER RAIN */
+/* Final */
+.finalText{
+    font-family:'Great Vibes',cursive;
+    font-size:70px;
+    animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+    from{text-shadow:0 0 10px #fff;}
+    to{text-shadow:0 0 30px #ff005d;}
+}
+
+/* Banner */
+.banner{
+    background:rgba(255,255,255,0.2);
+    padding:20px;
+    border-radius:20px;
+    margin-top:20px;
+}
+
+/* Flowers */
 .flower{
-  position:fixed;
-  top:-40px;
-  font-size:24px;
-  animation:fall linear forwards;
+    position:fixed;
+    top:-50px;
+    font-size:25px;
+    animation:fall linear infinite;
 }
 @keyframes fall{
-  to{transform:translateY(110vh)}
-}
-
-/* FIREWORK */
-.spark{
-  position:fixed;
-  font-size:20px;
-  animation:boom 1.5s forwards;
-}
-@keyframes boom{
-  to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}
+    to{transform:translateY(110vh);}
 }
 </style>
 </head>
 
 <body>
 
+<!-- MUSIC -->
+<audio id="song" src="song.mp3"></audio>
+
 <!-- INTRO -->
-<div id="intro">
-  <div class="ring">💍</div>
-  <div id="typing"></div>
+<div id="intro" class="center">
+    <img src="https://i.imgur.com/7I5Yc5N.png" class="ring">
+    <div class="typing">Sargam 💝</div>
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
+<!-- QUESTIONS -->
+<div id="quiz" class="center hidden">
+    <img src="https://i.imgur.com/jYy1Y6G.png" class="panda">
 
-<!-- START -->
-<div class="card hidden" id="startCard">
-  <div class="panda">🐼</div>
-  <h2>I have something special 💖</h2>
-  <button onclick="start()">Start 💕</button>
-</div>
+    <div class="question">Tum meri zindagi ka sabse pyara hissa banogi? 💍</div>
 
-<!-- QUESTION -->
-<div class="card hidden" id="questionCard">
-  <div class="panda">🐼🌹</div>
-  <p style="font-size:1.1rem">
-    Can I be your forever favorite person? 💝
-  </p>
-  <button onclick="final()">YES 😍</button>
-  <button onclick="final()">OF COURSE 💕</button>
+    <div class="btns">
+        <button class="yes" onclick="final()">YES 💖</button>
+        <button class="no" id="noBtn">NO 🙈</button>
+    </div>
 </div>
 
 <!-- FINAL -->
-<div class="card hidden" id="finalCard">
-  <div class="final-ring">💍</div>
-  <div class="love">I Love You</div>
-  <div class="love">Sargam Jii 💝</div>
+<div id="final" class="center hidden">
+    <div class="finalText">I Love You 💝</div>
+
+    <div class="banner">
+        <p>
+            जुदाई सहने की आदत नहीं है,<br>
+            बिन तेरे रहने की चाहत नहीं है,<br>
+            चाहत है सिर्फ तेरे साथ जीने की,<br>
+            हमारी कोई खुआइस नहीं है.....🤭 💖
+        </p>
+    </div>
 </div>
 
 <script>
-/* TYPING INTRO */
-const text="Sargam Jii 💝";
-let i=0;
-function type(){
-  if(i<text.length){
-    typing.innerHTML+=text.charAt(i);
-    i++;
-    setTimeout(type,130);
-  }else{
-    setTimeout(()=>{
-      intro.style.display="none";
-      startCard.classList.remove("hidden");
-    },900);
-  }
-}
-type();
+const song = document.getElementById("song");
 
-/* START */
-function start(){
-  bgMusic.play();
-  startCard.classList.add("hidden");
-  questionCard.classList.remove("hidden");
-}
+setTimeout(()=>{
+    song.play();
+},500);
 
-/* FINAL */
+setTimeout(()=>{
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+},4500);
+
+/* NO Button Run */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+    const x = Math.random()*80;
+    const y = Math.random()*80;
+    noBtn.style.left = x+"%";
+    noBtn.style.top = y+"%";
+});
+
+/* Final */
 function final(){
-  questionCard.classList.add("hidden");
-  finalCard.classList.remove("hidden");
-  fireworks();
-  flowerRain();
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("final").classList.remove("hidden");
+    flowerRain();
 }
 
-/* FIREWORK */
-function fireworks(){
-  for(let i=0;i<35;i++){
-    const s=document.createElement("div");
-    s.className="spark";
-    s.innerText="✨";
-    s.style.left="50%";
-    s.style.top="50%";
-    s.style.setProperty("--x",(Math.random()*500-250)+"px");
-    s.style.setProperty("--y",(Math.random()*400-200)+"px");
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),1500);
-  }
-}
-
-/* FLOWER RAIN */
+/* Flower Rain */
 function flowerRain(){
-  setInterval(()=>{
-    const f=document.createElement("div");
-    f.className="flower";
-    f.innerText="🌸";
-    f.style.left=Math.random()*100+"vw";
-    f.style.animationDuration=3+Math.random()*4+"s";
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),8000);
-  },300);
+    for(let i=0;i<30;i++){
+        let f = document.createElement("div");
+        f.innerHTML="🌸";
+        f.className="flower";
+        f.style.left=Math.random()*100+"%";
+        f.style.animationDuration=(3+Math.random()*3)+"s";
+        document.body.appendChild(f);
+    }
 }
 </script>
 
