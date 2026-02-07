@@ -2,59 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Propose Day 💍</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Rose Day 💝</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
 body{
   margin:0;
   font-family:Poppins,sans-serif;
-  background:linear-gradient(135deg,#ff4e78,#ff9a9e);
+  background:radial-gradient(circle at top,#ffb6c1,#ff4d6d);
   color:#fff;
   text-align:center;
-  overflow-x:hidden;
+  overflow:hidden;
+}
+
+/* HEART BACKGROUND */
+.heart{
+  position:fixed;
+  bottom:-50px;
+  font-size:22px;
+  animation:float linear infinite;
+  opacity:.8;
+}
+@keyframes float{
+  to{transform:translateY(-120vh) scale(1.5);opacity:0}
 }
 
 /* INTRO */
 #intro{
   position:fixed;
   inset:0;
-  background:linear-gradient(135deg,#ff4e78,#ff9a9e);
+  background:linear-gradient(135deg,#ff4d6d,#ff8fab);
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
-  z-index:9999;
+  flex-direction:column;
+  z-index:999;
 }
-.big-rose{
-  font-size:160px;
-  animation:rosePulse 2s infinite;
+.ring{
+  font-size:120px;
+  animation:ring 2s infinite;
 }
-@keyframes rosePulse{
-  0%,100%{transform:scale(1);filter:drop-shadow(0 0 20px #fff)}
-  50%{transform:scale(1.15);filter:drop-shadow(0 0 50px #fff)}
+@keyframes ring{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15) rotate(5deg)}
 }
-#typing{
+#type{
   font-family:'Great Vibes',cursive;
-  font-size:3.8rem;
+  font-size:3.2rem;
   margin-top:20px;
   min-height:80px;
   text-shadow:0 0 25px #fff;
 }
 
-/* MAIN */
-.hidden{display:none}
-header{padding:40px 20px}
-h1{font-family:'Great Vibes',cursive;font-size:3.4rem}
-
+/* CARD */
 .card{
-  background:rgba(255,255,255,.22);
-  backdrop-filter:blur(14px);
-  border-radius:22px;
-  padding:25px;
+  background:rgba(255,255,255,.2);
+  backdrop-filter:blur(12px);
+  border-radius:25px;
+  padding:30px;
   max-width:420px;
   margin:20px auto;
   animation:fadeUp 1s ease;
@@ -63,79 +71,46 @@ h1{font-family:'Great Vibes',cursive;font-size:3.4rem}
   from{opacity:0;transform:translateY(40px)}
   to{opacity:1;transform:translateY(0)}
 }
+.hidden{display:none}
 
-input,button{
+button,input{
   width:100%;
-  padding:13px;
-  margin-top:12px;
-  border-radius:14px;
+  padding:14px;
+  margin-top:14px;
+  border-radius:18px;
   border:none;
   font-size:1rem;
 }
 button{
-  background:#ff2f68;
+  background:#ff1e56;
   color:#fff;
   cursor:pointer;
 }
-button:hover{transform:scale(1.05)}
+button:hover{transform:scale(1.06)}
 
 .teddy{
   font-size:90px;
-  animation:teddyDance 1.2s infinite alternate;
+  animation:teddy 1s infinite alternate;
 }
-@keyframes teddyDance{
-  from{transform:rotate(-10deg)}
-  to{transform:rotate(10deg)}
+@keyframes teddy{
+  from{transform:rotate(-8deg)}
+  to{transform:rotate(8deg)}
 }
 
-/* ROSE RAIN */
-.rose{
+/* FIREWORK TEXT */
+.fire{
   position:fixed;
-  top:-40px;
-  font-size:22px;
-  animation:fall linear infinite;
-}
-@keyframes fall{to{transform:translateY(110vh)}}
-
-/* GLOW */
-body.glow{
-  animation:glow .6s ease-in-out;
-}
-@keyframes glow{
-  0%,100%{box-shadow:0 0 20px rgba(255,255,255,.3)}
-  50%{box-shadow:0 0 60px rgba(255,255,255,.9)}
-}
-
-/* MUSIC WAVE */
-#musicWave{
-  position:fixed;
-  bottom:20px;
+  font-family:'Great Vibes',cursive;
+  font-size:3.5rem;
   left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:6px;
+  top:50%;
+  transform:translate(-50%,-50%);
+  animation:boom 2s forwards;
 }
-.music-bar{
-  width:6px;
-  height:12px;
-  background:#fff;
-  animation:beat 1s infinite;
-}
-.music-bar:nth-child(2){animation-delay:.1s}
-.music-bar:nth-child(3){animation-delay:.2s}
-.music-bar:nth-child(4){animation-delay:.3s}
-@keyframes beat{
-  50%{height:35px}
-}
-
-/* FIREWORK */
-@keyframes firework{
-  to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}
-}
-.fire-letter{
-  position:fixed;
-  font-size:28px;
-  animation:firework 1.6s forwards;
+@keyframes boom{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}
+  100%{opacity:1;transform:translate(-50%,-50%) scale(1)}
 }
 </style>
 </head>
@@ -144,143 +119,98 @@ body.glow{
 
 <!-- INTRO -->
 <div id="intro">
-  <div class="big-rose">🌹</div>
-  <div id="typing"></div>
+  <div class="ring">💍</div>
+  <div id="type"></div>
 </div>
 
-<!-- MUSIC -->
-<audio id="bgMusic" preload="auto">
+<audio id="bgMusic" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<div id="musicWave"></div>
-
-<header class="hidden" id="mainHeader">
-  <h1>Happy Rose Day Cutie 🌹</h1>
-</header>
-
 <div class="card hidden" id="startCard">
   <div class="teddy">🧸</div>
-  <h2>Ready for a surprise? 💝</h2>
-  <button onclick="startSurprise()">Start 💖</button>
+  <h2>Someone wants to ask you something… 💕</h2>
+  <button onclick="start()">Continue 💖</button>
 </div>
 
 <div class="card hidden" id="nameCard">
-  <h2>Enter Name 🌸</h2>
-  <input id="gfName" placeholder="ENTER CUTE NAME">
-  <button onclick="showWish()">Next 🌹</button>
-</div>
-
-<div class="card hidden" id="wishCard">
-  <h2 id="wishText"></h2>
-  <p>You are the most beautiful rose in my life 🌹</p>
-  <button onclick="showQuiz()">Love 😘 💘</button>
+  <h2>Your Name 💗</h2>
+  <input id="gfName" placeholder="Her beautiful name">
+  <button onclick="next()">Next 💍</button>
 </div>
 
 <div class="card hidden" id="quizCard">
-  <div class="teddy">🧸</div>
-  <h2>💝😚💖</h2>
-  <p>What am I to you? 😚</p>
-  <button onclick="quizAnswer()">My Everything ❤️</button>
-  <button onclick="quizAnswer()">My Forever ♾️</button>
+  <h2>One Question 🥺</h2>
+  <p>If I hold your hand, will you hold it forever?</p>
+  <button onclick="yes()">YES 😍</button>
+  <button onclick="yes()">Obviously YES 💞</button>
 </div>
 
 <div class="card hidden" id="finalCard">
-  <div class="teddy">🧸💝</div>
-  <h2>💥💖</h2>
+  <div class="teddy">🧸💖</div>
+  <h2 id="finalText"></h2>
+  <p>Will you be mine forever? 💍🌹</p>
 </div>
 
 <script>
-/* MUSIC BARS */
-const wave=document.getElementById("musicWave");
-for(let i=0;i<4;i++){
-  const b=document.createElement("div");
-  b.className="music-bar";
-  wave.appendChild(b);
-}
-
-/* TYPING INTRO */
-const typingEl=document.getElementById("typing");
-const introText="Happy Rose day Sargam Jii 💝";
-let t=0;
-function typeIntro(){
-  if(t<introText.length){
-    typingEl.innerHTML+=introText.charAt(t);
-    t++;
-    setTimeout(typeIntro,120);
+/* INTRO TYPING */
+const text="Happy Propose Day 💍";
+let i=0;
+function typing(){
+  if(i<text.length){
+    type.innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typing,120);
   }else{
     setTimeout(()=>{
       intro.style.display="none";
-      mainHeader.classList.remove("hidden");
       startCard.classList.remove("hidden");
-    },1200);
+    },800);
   }
 }
-typeIntro();
+typing();
 
 /* START */
-function startSurprise(){
+function start(){
   bgMusic.play();
   startCard.classList.add("hidden");
   nameCard.classList.remove("hidden");
-
-  setInterval(()=>{
-    document.body.classList.add("glow");
-    setTimeout(()=>document.body.classList.remove("glow"),300);
-  },600);
 }
 
-function showWish(){
-  const name=gfName.value||"ENTER CUTE NAME";
-  window.girlName=name;
+/* NEXT */
+function next(){
+  const name=gfName.value||"My Love";
+  window.gname=name;
   nameCard.classList.add("hidden");
-  wishText.innerText=`Happy Rose Day ${name} 🌹`;
-  wishCard.classList.remove("hidden");
-}
-
-function showQuiz(){
-  wishCard.classList.add("hidden");
   quizCard.classList.remove("hidden");
 }
 
-function quizAnswer(){
+/* YES */
+function yes(){
   quizCard.classList.add("hidden");
+  finalText.innerText=`${gname}, I Love You 💖`;
   finalCard.classList.remove("hidden");
-  fireworksText("Sargam Jii 💝");
+  fireText();
 }
 
-/* FIREWORK TEXT */
-function fireworksText(text){
-  const cx=innerWidth/2;
-  const cy=innerHeight/2;
-  [...text].forEach((ch,i)=>{
-    if(ch===" ")return;
-    setTimeout(()=>{
-      for(let j=0;j<6;j++){
-        const p=document.createElement("div");
-        p.className="fire-letter";
-        p.innerText=ch;
-        p.style.left=cx+(i*26-text.length*13)+"px";
-        p.style.top=cy+"px";
-        p.style.setProperty("--x",(Math.random()*300-150)+"px");
-        p.style.setProperty("--y",(Math.random()*300-150)+"px");
-        document.body.appendChild(p);
-        setTimeout(()=>p.remove(),1600);
-      }
-    },i*200);
-  });
+/* FIRE TEXT */
+function fireText(){
+  const f=document.createElement("div");
+  f.className="fire";
+  f.innerText=`${gname} 💍`;
+  document.body.appendChild(f);
 }
 
-/* ROSE RAIN */
+/* HEART FLOAT */
 setInterval(()=>{
-  const r=document.createElement("div");
-  r.className="rose";
-  r.innerText="🌹";
-  r.style.left=Math.random()*100+"vw";
-  r.style.animationDuration=3+Math.random()*5+"s";
-  document.body.appendChild(r);
-  setTimeout(()=>r.remove(),8000);
-},320);
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerText="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=4+Math.random()*4+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+},300);
 </script>
 
 </body>
