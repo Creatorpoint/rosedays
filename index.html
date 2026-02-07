@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Propose Day 💖</title>
+<title>Propose Day 💍</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
@@ -18,42 +18,29 @@ body{
   overflow:hidden;
 }
 
-/* RING FALL */
-.ring{
-  position:fixed;
-  top:-50px;
-  font-size:28px;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  to{transform:translateY(120vh) rotate(360deg);opacity:0}
-}
-
 /* INTRO */
 #intro{
   position:fixed;
   inset:0;
-  background:radial-gradient(circle,#ff5f6d,#ffc371);
+  background:radial-gradient(circle,#ff758c,#ff7eb3);
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  z-index:999;
+  z-index:9999;
 }
-
-.heart-big{
-  font-size:120px;
-  animation:pulse 1.6s infinite;
+.big-ring{
+  font-size:170px;
+  animation:ringGrow 2.2s ease forwards;
 }
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.2)}
+@keyframes ringGrow{
+  from{transform:scale(0);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
-
 #typing{
   font-family:'Great Vibes',cursive;
-  font-size:3.2rem;
-  margin-top:20px;
+  font-size:3.6rem;
+  margin-top:25px;
   text-shadow:0 0 30px #fff;
   min-height:90px;
 }
@@ -61,50 +48,80 @@ body{
 /* CARDS */
 .card{
   background:rgba(255,255,255,.15);
-  backdrop-filter:blur(16px);
-  border-radius:28px;
+  backdrop-filter:blur(18px);
+  border-radius:30px;
   padding:30px;
   max-width:420px;
-  margin:40px auto;
-  animation:slide 1s ease;
+  margin:60px auto;
+  animation:slideUp 1s ease;
 }
-@keyframes slide{
-  from{opacity:0;transform:translateY(50px)}
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(60px)}
   to{opacity:1;transform:translateY(0)}
 }
 .hidden{display:none}
 
-button,input{
+button{
   width:100%;
   padding:14px;
-  margin-top:14px;
+  margin-top:15px;
   border-radius:22px;
   border:none;
   font-size:1rem;
-}
-button{
-  background:#ff416c;
+  background:#ff4b7d;
   color:#fff;
   cursor:pointer;
 }
 button:hover{transform:scale(1.06)}
 
-.teddy{
-  font-size:85px;
-  animation:wiggle 1s infinite alternate;
+.panda{
+  font-size:90px;
+  animation:panda 1s infinite alternate;
 }
-@keyframes wiggle{
-  from{transform:rotate(-6deg)}
-  to{transform:rotate(6deg)}
+@keyframes panda{
+  from{transform:rotate(-7deg)}
+  to{transform:rotate(7deg)}
 }
 
-/* FINAL TEXT */
-.final{
-  font-family:'Playfair Display',serif;
-  font-size:2.6rem;
-  animation:fade 2s ease;
+/* RUNNING BUTTON */
+.run{
+  position:absolute;
+  width:180px;
 }
-@keyframes fade{
+
+/* FINAL */
+.final-ring{
+  font-size:150px;
+  animation:zoomRing 2s ease forwards;
+}
+@keyframes zoomRing{
+  from{transform:scale(0)}
+  to{transform:scale(1.2)}
+}
+.sparkle{
+  position:fixed;
+  font-size:20px;
+  animation:sparkle 1.5s ease forwards;
+}
+@keyframes sparkle{
+  to{transform:translate(var(--x),var(--y));opacity:0}
+}
+
+/* FIREWORK TEXT */
+.fire{
+  position:fixed;
+  font-size:22px;
+  animation:fire 1.6s forwards;
+}
+@keyframes fire{
+  to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}
+}
+.fire-text{
+  font-family:'Great Vibes',cursive;
+  font-size:3.4rem;
+  animation:fadeIn 2s ease;
+}
+@keyframes fadeIn{
   from{opacity:0}
   to{opacity:1}
 }
@@ -115,7 +132,7 @@ button:hover{transform:scale(1.06)}
 
 <!-- INTRO -->
 <div id="intro">
-  <div class="heart-big">💖</div>
+  <div class="big-ring">💍</div>
   <div id="typing"></div>
 </div>
 
@@ -125,28 +142,28 @@ button:hover{transform:scale(1.06)}
 
 <!-- START -->
 <div class="card hidden" id="startCard">
-  <div class="teddy">🧸</div>
-  <h2>Someone wants to say something 💌</h2>
-  <button onclick="start()">Open 💕</button>
+  <div class="panda">🐼</div>
+  <h2>I have something to ask you 💌</h2>
+  <button onclick="start()">Open Surprise 💕</button>
 </div>
 
 <!-- QUESTION -->
-<div class="card hidden" id="questionCard">
-  <h2>One Question 💍</h2>
-  <p>If love was a ring,<br>would you wear mine forever? 🥺</p>
-  <button onclick="answer()">Yes ❤️</button>
-  <button onclick="answer()">Always 💕</button>
+<div class="card hidden" id="q1">
+  <div class="panda">🐼💍</div>
+  <p>Will you be mine forever? 🥺</p>
+
+  <button id="yesBtn" class="run" onclick="final()">YES 💝</button>
+  <button onclick="final()">100% YES 😘</button>
 </div>
 
 <!-- FINAL -->
 <div class="card hidden" id="finalCard">
-  <div class="teddy">🧸💖</div>
-  <div class="final">Sargam Jii 💝</div>
-  <p>Will you be mine forever? 💍</p>
+  <div class="final-ring">💍</div>
+  <div class="fire-text">Sargam Jii 💝</div>
 </div>
 
 <script>
-/* INTRO TYPING */
+/* TYPING */
 const text="Sargam Jii 💝";
 let i=0;
 function type(){
@@ -167,25 +184,55 @@ type();
 function start(){
   bgMusic.play();
   startCard.classList.add("hidden");
-  questionCard.classList.remove("hidden");
+  q1.classList.remove("hidden");
+  moveYes();
 }
 
-/* ANSWER */
-function answer(){
-  questionCard.classList.add("hidden");
+/* RUNNING YES */
+function moveYes(){
+  const btn=document.getElementById("yesBtn");
+  btn.style.top=Math.random()*60+20+"%";
+  btn.style.left=Math.random()*60+20+"%";
+}
+yesBtn?.addEventListener("mouseover",moveYes);
+
+/* FINAL */
+function final(){
+  q1.classList.add("hidden");
   finalCard.classList.remove("hidden");
+  fireworks();
+  sparkle();
 }
 
-/* RING FALL EFFECT */
-setInterval(()=>{
-  const r=document.createElement("div");
-  r.className="ring";
-  r.innerText="💍";
-  r.style.left=Math.random()*100+"vw";
-  r.style.animationDuration=4+Math.random()*4+"s";
-  document.body.appendChild(r);
-  setTimeout(()=>r.remove(),8000);
-},400);
+/* FIREWORK EFFECT */
+function fireworks(){
+  for(let i=0;i<50;i++){
+    const f=document.createElement("div");
+    f.className="fire";
+    f.innerText="✨";
+    f.style.left="50%";
+    f.style.top="50%";
+    f.style.setProperty("--x",(Math.random()*500-250)+"px");
+    f.style.setProperty("--y",(Math.random()*400-200)+"px");
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1600);
+  }
+}
+
+/* SPARKLE */
+function sparkle(){
+  for(let i=0;i<25;i++){
+    const s=document.createElement("div");
+    s.className="sparkle";
+    s.innerText="✨";
+    s.style.left="50%";
+    s.style.top="50%";
+    s.style.setProperty("--x",(Math.random()*300-150)+"px");
+    s.style.setProperty("--y",(Math.random()*300-150)+"px");
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),1500);
+  }
+}
 </script>
 
 </body>
